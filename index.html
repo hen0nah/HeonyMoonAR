@@ -1,3 +1,541 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>스페인 10일 여행 최종 계획</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font - Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+            font-size: 0.875rem; /* Base font size reduced for mobile */
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+        .card {
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            background-color: #f9fafb;
+        }
+        th, td {
+            padding: 0.6rem;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 0.8rem; /* Small font size for mobile tables */
+        }
+        th {
+            background-color: #e5e7eb;
+            font-weight: 600;
+        }
+        tr:last-child td {
+            border-bottom: none;
+        }
+        .tab-button {
+            transition: all 0.2s;
+            font-size: 0.8rem; /* Small font size for mobile tabs */
+        }
+        .tab-button.active {
+            background-color: #ffffff;
+            color: #4338ca;
+            border-bottom: 4px solid #4f46e5;
+        }
+        @media (min-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+            .card {
+                padding: 2rem;
+                margin-bottom: 2rem;
+            }
+            .grid-cols-2 {
+                grid-template-columns: 1fr 1fr;
+            }
+            th, td {
+                font-size: 1rem;
+            }
+            .tab-button {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header Section -->
+    <header class="bg-indigo-600 text-white py-8 md:py-12 px-4 shadow-lg">
+        <div class="container text-center">
+            <h1 class="text-2xl md:text-5xl font-extrabold tracking-tight">스페인 10일 여행 최종 계획</h1>
+            <p class="mt-2 md:mt-4 text-lg md:text-2xl font-light">마드리드, 톨레도, 바르셀로나, 지로나</p>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white sticky top-0 z-10 shadow-md">
+        <div class="container flex justify-center space-x-2 md:space-x-4 p-2 md:p-2">
+            <button id="dashboard-tab" class="tab-button active py-2 md:py-3 px-3 md:px-6 text-indigo-800 font-medium rounded-t-lg focus:outline-none">대시보드</button>
+            <button id="booking-info-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">예약 정보</button>
+            <button id="itinerary-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">상세 일정</button>
+            <button id="budget-tips-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">비용 & 팁</button>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="container mt-4 md:mt-8">
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="card">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">여행 요약 대시보드</h2>
+
+            <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+                <!-- Trip Core Summary -->
+                <div>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-gray-800">여행 핵심</h3>
+                    <ul class="space-y-3 md:space-y-4 text-gray-700 text-sm md:text-base">
+                        <li>
+                            <p><strong>마드리드:</strong> 프라도 미술관과 열정적인 플라멩코 공연을 즐깁니다.</p>
+                            <p><strong>톨레도:</strong> 고도 톨레도를 여행하고 기차로 바르셀로나로 이동합니다.</p>
+                        </li>
+                        <li>
+                            <p><strong>바르셀로나:</strong> 가우디의 건축물 투어(사그라다 파밀리아, 구엘 공원 등)를 집중적으로 합니다.</p>
+                            <p><strong>지로나:</strong> 렌터카로 지로나와 아름다운 해안의 코스타 브라바를 탐방합니다.</p>
+                            <p><strong>몬세라트:</strong> 몬세라트 수도원을 방문합니다.</p>
+                        </li>
+                        <li>
+                            <p><strong>마무리 & 귀국:</strong> 여행을 마무리하며 바르셀로네타 해변을 산책하고, 바르셀로나 공항에서 귀국 준비를 합니다.</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Summary of Key Info -->
+                <div>
+                    <h3 class="text-xl md:text-2xl font-semibold mb-3 md:mb-4 text-gray-800">요약 정보</h3>
+                    <div class="bg-indigo-50 p-4 md:p-6 rounded-xl space-y-3 md:space-y-4 text-sm md:text-base">
+                        <p class="font-medium text-indigo-800">
+                            <strong>총 여행 기간:</strong> 11일 (10박)
+                        </p>
+                        <p class="font-medium text-indigo-800">
+                            <strong>방문 도시:</strong> 마드리드, 톨레도, 바르셀로나, 지로나
+                        </p>
+                        <p class="font-medium text-indigo-800">
+                            <strong>예상 비용 (1인, 항공권 제외):</strong> ₩ 2,595,000 ~ 4,320,000
+                        </p>
+                        <p class="font-medium text-indigo-800">
+                            <strong>주요 이동 수단:</strong> 고속 열차(AVE), 렌터카
+                        </p>
+                        <p class="font-medium text-indigo-800">
+                            <strong>필수 예약:</strong> 프라도 미술관, 가우디 건축물, 플라멩코 공연, AVE 티켓
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Travel Route Map -->
+            <div class="mt-8">
+                <h3 class="text-xl md:text-2xl font-semibold mb-3 text-gray-800">여행 경로 지도</h3>
+                <div class="flex justify-center">
+                    <a href="https://www.google.com/maps/dir/Madrid/Toledo,+Spain/Barcelona,+Spain/Girona,+Spain/Barcelona,+Spain" target="_blank" rel="noopener noreferrer">
+                        <img src="http://googleusercontent.com/file_content/1" alt="스페인 주요 도시 마드리드, 톨레도, 바르셀로나, 지로나를 표시한 여행 경로 지도" class="rounded-xl shadow-lg w-full max-w-2xl cursor-pointer">
+                    </a>
+                </div>
+                <p class="mt-4 text-center text-sm text-gray-600">
+                    *지도를 클릭하면 마드리드, 톨레도, 바르셀로나, 지로나를 연결하는 자세한 경로를 구글 지도에서 확인하실 수 있습니다.
+                </p>
+            </div>
+        </section>
+
+        <!-- Booking Info Section -->
+        <section id="booking-info" class="card hidden">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">예약 정보</h2>
+
+            <!-- Accommodation Table -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">숙박 (Accommodation)</h3>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>도시</th>
+                            <th>체크인 날짜</th>
+                            <th>체크아웃 날짜</th>
+                            <th>숙박 일수</th>
+                            <th>숙소 위치 추천</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>마드리드</td>
+                            <td>10/25 (금)</td>
+                            <td>10/27 (일)</td>
+                            <td>2박</td>
+                            <td>솔(Sol) 광장 또는 마요르(Mayor) 광장 근처</td>
+                        </tr>
+                        <tr>
+                            <td>톨레도</td>
+                            <td>10/27 (일)</td>
+                            <td>10/28 (월)</td>
+                            <td>1박</td>
+                            <td>구시가지 내</td>
+                        </tr>
+                        <tr>
+                            <td>바르셀로나 (1차)</td>
+                            <td>10/28 (월)</td>
+                            <td>10/31 (목)</td>
+                            <td>3박</td>
+                            <td>에이샴플라(Eixample) 또는 고딕 지구 근처</td>
+                        </tr>
+                        <tr>
+                            <td>지로나</td>
+                            <td>10/31 (목)</td>
+                            <td>11/01 (금)</td>
+                            <td>1박</td>
+                            <td>구시가지 내 또는 강변</td>
+                        </tr>
+                        <tr>
+                            <td>바르셀로나 (2차)</td>
+                            <td>11/01 (금)</td>
+                            <td>11/04 (월)</td>
+                            <td>3박</td>
+                            <td>에이샴플라(Eixample) 또는 고딕 지구 근처</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Train Table -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">기차 (Train)</h3>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th>구간</th>
+                            <th>소요시간</th>
+                            <th>출발/도착 시간</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10/27 (일)</td>
+                            <td>마드리드 → 톨레도</td>
+                            <td>약 30분</td>
+                            <td>오전 9시 이전 출발 권장</td>
+                        </tr>
+                        <tr>
+                            <td>10/28 (월)</td>
+                            <td>톨레도 → 마드리드</td>
+                            <td>약 30분</td>
+                            <td>오전 10시 이전 출발 권장</td>
+                        </tr>
+                        <tr>
+                            <td>10/28 (월)</td>
+                            <td>마드리드 → 바르셀로나</td>
+                            <td>2시간 30분 ~ 3시간</td>
+                            <td>오후 늦게 출발</td>
+                        </tr>
+                        <tr>
+                            <td>11/02 (토)</td>
+                            <td>바르셀로나 → 몬세라트</td>
+                            <td>약 1시간 30분</td>
+                            <td>오전 9시 이전 출발 권장</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Luggage Path Table -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">짐 이동 경로 (Luggage Path)</h3>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>날짜</th>
+                            <th>장소</th>
+                            <th>짐 상태</th>
+                            <th>비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10/25 (금)</td>
+                            <td>마드리드</td>
+                            <td>짐 풀기</td>
+                            <td>숙소 체크인 후 마드리드에 짐 보관</td>
+                        </tr>
+                        <tr>
+                            <td>10/28 (월)</td>
+                            <td>마드리드 / 바르셀로나</td>
+                            <td>짐 보관 및 이동</td>
+                            <td>아토차역 짐 보관소에 짐 맡긴 후 바르셀로나로 이동</td>
+                        </tr>
+                        <tr>
+                            <td>10/31 (목)</td>
+                            <td>지로나는</td>
+                            <td>짐 이동</td>
+                            <td>바르셀로나 숙소 체크아웃 후 렌터카로 지로나 이동</td>
+                        </tr>
+                        <tr>
+                            <td>11/01 (금)</td>
+                            <td>바르셀로나</td>
+                            <td>짐 이동</td>
+                            <td>지로나는 숙소 체크아웃 후 렌터카로 바르셀로나 이동</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Detailed Itinerary Section -->
+        <section id="itinerary" class="card hidden">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">일자별 상세 일정</h2>
+
+            <!-- Day 1 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 1 (10월 25일, 금) | 마드리드 도착 및 휴식</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li><b>마드리드 바라하스 국제공항(MAD)</b>에 도착하여 입국 수속을 합니다.</li>
+                <li>공항버스나 공항철도(Metro)를 이용하여 시내 숙소로 이동합니다.</li>
+                <li>숙소 체크인 후, 근처에서 간단한 저녁 식사를 하고 장거리 비행의 피로를 풉니다.</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>숙소 및 교통편:</b></p>
+            <p class="mt-2 text-sm md:text-base">추천 숙소 위치: 솔(Sol) 광장 또는 마요르(Mayor) 광장 근처. 주요 관광지를 도보로 이동하기 편리하고, 대중교통 접근성이 뛰어납니다. 공항-시내 이동: 공항버스(Exprés Aeropuerto)를 이용하면 솔 광장 근처의 시벨레스 광장까지 쉽게 갈 수 있습니다.</p>
+
+            <!-- Day 2 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 2 (10월 26일, 토) | 마드리드 도보 여행: 프라도 미술관 & 플라멩코</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>오전부터 오후까지 프라도 미술관에서 스페인 거장인 고야, 벨라스케스, 엘 그레코의 작품을 중심으로 감상합니다.</li>
+                <li>미술관 관람 후, 레티로 공원을 산책하며 여유를 즐깁니다.</li>
+                <li>저녁: 산 미겔 시장으로 이동하여 다양한 종류의 타파스를 맛보거나, 현지 레스토랑에서 저녁 식사를 합니다. 이후 마드리드의 열정적인 플라멩코 공연을 관람하며 특별한 밤을 보냅니다.</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>프라도 미술관은 관람객이 많으므로 온라인 사전 예매가 필수입니다.</li>
+                <li>하루 종일 걷는 일정이므로 편안한 신발을 준비하세요.</li>
+                <li>플라멩코 공연은 인기가 많으니 미리 온라인으로 예약해두는 것이 좋습니다.</li>
+            </ul>
+
+            <!-- Day 3 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 3 (10월 27일, 일) | 톨레도 당일치기</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>오전: 마드리드 아토차(Atocha) 역에서 고속 열차(AVE)를 타고 톨레도로 이동합니다 (약 30분 소요).</li>
+                <li>톨레도 도착 후 톨레도 대성당 주변의 고풍스러운 골목을 거닐며 여유를 즐깁니다.</li>
+                <li>저녁: 톨레도 야경을 감상하며 낭만적인 밤을 보냅니다.</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>숙소 및 교통편:</b></p>
+            <p class="mt-2 text-sm md:text-base">마드리드-톨레도 이동: 열차는 아토차 역에서 출발하며, 약 30분 만에 톨레도에 도착합니다. 매우 편리합니다.</p>
+
+            <!-- Day 4 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 4 (10월 28일, 월) | 바르셀로나 이동 및 마드리드 잠시 들르기</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>오전: 톨레도 숙소에서 체크아웃 후, 마드리드 아토차 역으로 돌아옵니다.</li>
+                <li>짐 보관: 아토차 역 내에 있는 <b>짐 보관소(Consigna)</b>에 캐리어를 맡깁니다.</li>
+                <li>점심: 역 근처에서 간단히 식사 후, 택시 또는 메트로를 이용해 마드리드 왕궁 외관을 잠시 감상합니다.</li>
+                <li>늦은 오후: 아토차 역으로 돌아와 짐을 찾고 바르셀로나행 고속 열차(AVE)를 탑승합니다 (약 2시간 30분~3시간 소요).</li>
+                <li>바르셀로나 도착 후 숙소 체크인 및 휴식.</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
+            <p class="mt-2 text-sm md:text-base">이동이 많은 날이므로 피로도가 높을 수 있습니다. 바르셀로나 도착 후에는 무리한 일정을 잡지 마세요. 아토차 역 짐 보관소 위치를 미리 파악하고, 바르셀로나행 열차 시간도 여유롭게 잡아두면 편리합니다.</p>
+        
+            <!-- Day 5~6 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 5~6 (10월 29일~30일, 화, 수) | 바르셀로나 투어</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>Day 5 (가우디 투어): 사그라다 파밀리아 성당, 구엘 공원, 카사 바트요, 카사 밀라 등 가우디의 주요 건축물을 감상합니다.</li>
+                <li>Day 6 (시내 탐방): 고딕 지구, 람블라스 거리, 보케리아 시장을 탐방하며 바르셀로나의 분위기를 즐깁니다. 저녁에는 몬주익 마법의 분수 쇼를 관람합니다 (운영 일정 확인 필수).</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
+            <p class="mt-2 text-sm md:text-base">몬주익 마법의 분수쇼는 꼭 운영 일정을 미리 확인해야 합니다. 만약 운영하지 않는다면, 대신 고딕 지구의 좁은 골목길을 거닐며 분위기 좋은 바를 찾아보거나, 엘 본(El Born) 지역의 힙한 타파스 바에서 현지인처럼 밤을 즐기는 것도 좋은 추억이 될 거예요. 추천 숙소 위치: 에이샴플라(Eixample) 또는 고딕 지구 근처. 가우디 투어와 시내 탐방에 모두 용이합니다. 이동: 바르셀로나 시내에서는 메트로를 이용하는 것이 가장 효율적입니다.</p>
+
+            <!-- Day 7~8 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 7~8 (10월 31일~11월 1일, 목, 금) | 지로나 & 코스타 브라바 렌터카 투어</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>Day 7: 바르셀로나 시내 외곽의 렌터카 지점에서 차량을 대여하여 지로나는 중세 구시가지와 지로나는 대성당을 둘러본 후, 지로나에서 1박을 합니다.</li>
+                <li>Day 8: 지로나 숙소 체크아웃 후, 코스타 브라바 해안을 따라 드라이브하며 아름다운 해변 마을을 둘러봅니다. 오후에 바르셀로나로 돌아와 렌터카를 반납합니다.</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
+            <p class="mt-2 text-sm md:text-base">코스타 브라바 드라이브 시에는 토사 데 마르(Tossa de Mar), 카다케스(Cadaqués) 같은 유명한 곳 외에 숨겨진 작은 해변 마을을 찾아보는 것도 낭만적일 거예요.</p>
+        
+            <!-- Day 9 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 9 (11월 2일, 토) | 몬세라트 당일치기</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>바르셀로나에서 대중교통 또는 현지 투어 상품을 이용해 몬세라트로 이동합니다.</li>
+                <li>몬세라트 수도원, 검은 성모 마리아상을 관람하고, 운이 좋으면 소년 합창단 공연을 볼 수 있습니다 (공연 일정 사전 확인 필수).</li>
+                <li>늦은 오후에 바르셀로나로 돌아와 마지막 저녁 식사를 즐기며 여행을 마무리합니다.</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
+            <p class="mt-2 text-sm md:text-base">몬세라트 이동 시 기차+푸니쿨라/케이블카 조합이 가장 편리합니다. 몬세라트 통합 티켓(Trans Montserrat)을 구매하면 효율적입니다.</p>
+
+            <!-- Day 10 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 10 (11월 3일, 일) | 바르셀로나 해변 산책 및 귀국 준비</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>오전: 여유롭게 숙소에서 체크아웃 후, 짐 보관소에 짐을 맡깁니다.</li>
+                <li>오후: <b>바르셀로네타 해변(Platja de la Barceloneta)</b>을 거닐며 지중해의 따뜻한 햇살을 만끽합니다. 주변의 해산물 레스토랑에서 점심을 즐기는 것도 좋습니다.</li>
+                <li>저녁: 바르셀로나 시내 숙소에서 마지막 밤을 보냅니다.</li>
+            </ul>
+            <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
+            <p class="mt-2 text-sm md:text-base">11월에도 바르셀로나 해변은 걷기에 좋은 날씨입니다. 귀국 전 공항까지는 최소 2~3시간 전 도착을 권장합니다.</p>
+
+            <!-- Day 11 -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-2">Day 11 (11월 4일, 월) | 귀국</h3>
+            <p class="text-sm md:text-base"><b>일정:</b></p>
+            <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
+                <li>오전: 숙소에서 여유롭게 아침을 즐깁니다.</li>
+                <li>점심: 숙소 근처에서 마지막 식사를 합니다.</li>
+                <li>오후 1시: 바르셀로나 공항으로 이동하여 출국 수속을 밟고 인천으로 돌아옵니다.</li>
+            </ul>
+        </section>
+        
+        <!-- Budget & Tips Section -->
+        <section id="budget-tips" class="card hidden">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">여행 비용 & 팁</h2>
+
+            <!-- Budget Table -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">여행 비용 추산 (항공권 제외)</h3>
+            <div class="overflow-x-auto">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>항목</th>
+                            <th>대략적 비용 (1인 기준)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>숙박 (10박)</td>
+                            <td>₩ 1,050,000 ~ 1,800,000</td>
+                        </tr>
+                        <tr>
+                            <td>기차 (AVE, R5)</td>
+                            <td>₩ 270,000 ~ 375,000</td>
+                        </tr>
+                        <tr>
+                            <td>렌터카 (2일)</td>
+                            <td>₩ 150,000 ~ 270,000</td>
+                        </tr>
+                        <tr>
+                            <td>티켓 및 액티비티</td>
+                            <td>₩ 225,000 ~ 375,000</td>
+                        </tr>
+                        <tr>
+                            <td>식비</td>
+                            <td>₩ 750,000 ~ 1,200,000</td>
+                        </tr>
+                        <tr>
+                            <td>기타 (시내 교통, 기념품)</td>
+                            <td>₩ 150,000 ~ 300,000</td>
+                        </tr>
+                        <tr class="font-bold">
+                            <td>총계</td>
+                            <td>₩ 2,595,000 ~ 4,320,000</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-4 text-xs md:text-sm text-gray-600">※ 비용은 유로(€) 환율과 물가를 기반으로 추산된 것이며, 개인 소비 성향에 따라 변동될 수 있습니다.</p>
+
+            <!-- Weather & Attire -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">날씨 & 옷차림</h3>
+            <div class="bg-gray-50 p-4 md:p-6 rounded-xl border border-gray-200 text-sm md:text-base">
+                <p>10월 말 ~ 11월 초는 가을에서 초겨울로 넘어가는 시기입니다. **일교차가 크니 여러 겹 겹쳐 입는 옷차림**이 가장 좋습니다.</p>
+                <ul class="list-disc list-inside mt-4 space-y-2">
+                    <li>**마드리드 & 톨레도 (내륙):** 낮에는 쾌적하지만 밤에는 기온이 크게 떨어집니다. 얇은 니트, 가디건, **얇은 코트**나 **경량 패딩**을 챙기세요.</li>
+                    <li>**바르셀로나 & 지로나 (해안가):** 낮에는 비교적 온화하고 따뜻합니다. 얇은 긴팔, 셔츠를 주로 입고, 바람이 불거나 비가 올 수 있으니 **바람막이**나 **접는 우산**을 준비하는 것이 좋습니다.</li>
+                </ul>
+            </div>
+
+            <!-- Other Tips -->
+            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">놓치기 쉬운 팁</h3>
+            <div class="bg-gray-50 p-4 md:p-6 rounded-xl border border-gray-200 text-sm md:text-base">
+                <ul class="list-disc list-inside space-y-2">
+                    <li>**스마트폰 인터넷:** 현지 유심(SIM 카드) 또는 eSIM을 이용하는 것이 가장 효율적이고 경제적입니다.</li>
+                    <li>**현금:** 카드 사용이 보편적이지만, 소규모 상점이나 시장을 대비해 약간의 유로 현금을 준비하세요.</li>
+                    <li>**시에스타:** 스페인 현지 식당과 상점은 오후 2시~5시경 문을 닫는 경우가 많으니 영업 시간을 미리 확인하세요.</li>
+                    <li>**소매치기 주의:** 바르셀로나의 유명 관광지에서는 소매치기가 많으니 소지품 관리에 각별히 신경 써야 합니다.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Get the tab buttons and content sections
+        const dashboardTab = document.getElementById('dashboard-tab');
+        const bookingInfoTab = document.getElementById('booking-info-tab');
+        const itineraryTab = document.getElementById('itinerary-tab');
+        const budgetTipsTab = document.getElementById('budget-tips-tab');
+        
+        const dashboardSection = document.getElementById('dashboard');
+        const bookingInfoSection = document.getElementById('booking-info');
+        const itinerarySection = document.getElementById('itinerary');
+        const budgetTipsSection = document.getElementById('budget-tips');
+        
+        const allSections = [dashboardSection, bookingInfoSection, itinerarySection, budgetTipsSection];
+        const allTabs = [dashboardTab, bookingInfoTab, itineraryTab, budgetTipsTab];
+
+        // Function to show a specific section
+        function showSection(sectionToShow, tabToActivate) {
+            allSections.forEach(section => {
+                section.classList.add('hidden');
+            });
+            allTabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.classList.remove('text-indigo-800');
+                tab.classList.add('text-gray-600');
+            });
+            sectionToShow.classList.remove('hidden');
+            tabToActivate.classList.add('active');
+            tabToActivate.classList.remove('text-gray-600');
+            tabToActivate.classList.add('text-indigo-800');
+        }
+
+        // Add event listeners to the tab buttons
+        dashboardTab.addEventListener('click', () => {
+            showSection(dashboardSection, dashboardTab);
+        });
+
+        bookingInfoTab.addEventListener('click', () => {
+            showSection(bookingInfoSection, bookingInfoTab);
+        });
+
+        itineraryTab.addEventListener('click', () => {
+            showSection(itinerarySection, itineraryTab);
+        });
+
+        budgetTipsTab.addEventListener('click', () => {
+            showSection(budgetTipsSection, budgetTipsTab);
+        });
+    </script>
+</body>
+</html>
+
+
+
+<P>
+결혼식에서 썼던 카드
+
 <!doctype HTML>
 <html>
     <head>
@@ -29,3 +567,6 @@
         </a-scene>
     </body>
 </html>
+
+</P>
+
