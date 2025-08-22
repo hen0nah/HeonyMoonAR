@@ -3,988 +3,438 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>스페인 10일 여행 최종 계획</title>
+    <title>우리만의 스페인 신혼여행 계획</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Font - Inter -->
+    <!-- Inter font from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-            font-size: 0.875rem; /* Base font size reduced for mobile */
+            background-color: #f7f3f0; /* Soft, warm background */
         }
         .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 1rem;
+            max-width: 900px;
         }
-        .card {
+        .day-card {
             background-color: #ffffff;
-            border-radius: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
+            border-left: 5px solid #d4a373; /* Earthy orange accent */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            border-radius: 0.75rem;
-            overflow: hidden;
-            background-color: #f9fafb;
+        .day-card:hover {
+            transform: translateY(-5px);
         }
-        th, td {
-            padding: 0.6rem;
-            text-align: left;
-            border-bottom: 1px solid #e5e7eb;
-            font-size: 0.8rem; /* Small font size for mobile tables */
+        .tip-box {
+            background-color: #fffbe9; /* Light yellow for tips */
+            border-left: 4px solid #f0b70d;
         }
-        th {
-            background-color: #e5e7eb;
-            font-weight: 600;
+        /* Custom SVG icons for better visibility */
+        .icon {
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+            flex-shrink: 0;
         }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        .tab-button {
-            transition: all 0.2s;
-            font-size: 0.8rem; /* Small font size for mobile tabs */
-        }
-        .tab-button.active {
-            background-color: #ffffff;
-            color: #4338ca;
-            border-bottom: 4px solid #4f46e5;
-        }
-        .accordion-item {
-            margin-bottom: 1rem;
-        }
-        .accordion-summary {
-            cursor: pointer;
-            padding: 1rem;
-            background-color: #f9fafb;
-            border-radius: 0.75rem;
-            border: 1px solid #e5e7eb;
-            font-weight: 600;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .accordion-content {
-            padding: 1rem;
-            border: 1px solid #e5e7eb;
-            border-top: none;
-            border-radius: 0 0 0.75rem 0.75rem;
-            background-color: #ffffff;
-            display: none;
-        }
-        details[open] .accordion-content {
-            display: block;
-        }
-        .accordion-icon {
-            transition: transform 0.2s;
-        }
-        details[open] .accordion-icon {
-            transform: rotate(90deg);
-        }
-        @media (min-width: 768px) {
-            .container {
-                padding: 2rem;
-            }
-            .card {
-                padding: 2rem;
-                margin-bottom: 2rem;
-            }
-            .grid-cols-2 {
-                grid-template-columns: 1fr 1fr;
-            }
-            th, td {
-                font-size: 1rem;
-            }
-            .tab-button {
-                font-size: 1rem;
-            }
-        }
+        .icon-plane { color: #d4a373; }
+        .icon-car { color: #d4a373; }
+        .icon-train { color: #d4a373; }
+        .icon-museum { color: #5a8d9a; }
+        .icon-food { color: #a54b4b; }
+        .icon-sight { color: #588157; }
+        .icon-hotel { color: #724c91; }
     </style>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-[#F7F3F0] text-gray-800">
 
-    <!-- Header Section -->
-    <header class="bg-indigo-600 text-white py-8 md:py-12 px-4 shadow-lg">
-        <div class="container text-center">
-            <h1 class="text-2xl md:text-5xl font-extrabold tracking-tight">스페인 10일 여행 최종 계획</h1>
-            <p class="mt-2 md:mt-4 text-lg md:text-2xl font-light">마드리드, 톨레도, 바르셀로나, 지로나</p>
-        </div>
-    </header>
+    <div class="container mx-auto p-4 md:p-8">
 
-    <!-- Navigation Tabs -->
-    <nav class="bg-white sticky top-0 z-10 shadow-md">
-        <div class="container flex justify-center space-x-2 md:space-x-4 p-2 md:p-2">
-            <button id="dashboard-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">대시보드</button>
-            <button id="booking-info-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">예약 정보</button>
-            <button id="itinerary-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">상세 일정</button>
-            <button id="city-features-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">도시별 특징</button>
-            <button id="food-tab" class="tab-button active py-2 md:py-3 px-3 md:px-6 text-indigo-800 font-medium rounded-t-lg focus:outline-none">먹자</button>
-            <button id="budget-tips-tab" class="tab-button py-2 md:py-3 px-3 md:px-6 text-gray-600 font-medium rounded-t-lg focus:outline-none">비용 & 팁</button>
-        </div>
-    </nav>
+        <!-- Header Section -->
+        <header class="text-center my-8 md:my-12">
+            <h1 class="text-3xl md:text-5xl font-bold text-[#D4A373] mb-2">우리만의 스페인 신혼여행 계획</h1>
+            <p class="text-xl md:text-2xl text-gray-600 font-light">
+                <span class="font-semibold">깊이 있는 감상</span>과 <span class="font-semibold">편안한 휴식</span>이 함께하는 10박 11일 허니문
+            </p>
+        </header>
 
-    <!-- Main Content Container -->
-    <div class="container mt-4 md:mt-8">
+        <!-- Main Content Grid -->
+        <div class="space-y-8">
 
-        <!-- Dashboard Section -->
-        <section id="dashboard" class="card hidden">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">여행 요약 대시보드</h2>
+            <!-- Day 1 -->
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 1</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">10월 25일 (금) | 마드리드 도착 및 휴식</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-plane" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 22h20L12 2zM12 2v20"></path>
+                        </svg>
+                        <span>**오후 7시**: 마드리드 바라하스 국제공항(MAD) 도착 후 입국 수속</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-car" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-4-4H9"></path>
+                            <circle cx="19" cy="7" r="4"></circle>
+                        </svg>
+                        <span>**오후 8시**: 공항버스(Exprés Aeropuerto)로 시내 숙소 이동</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-hotel" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-7a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v7"></path>
+                            <path d="M2 21h20"></path>
+                            <path d="M10 21V11a2 2 0 0 1 2-2h0a2 2 0 0 1 2 2v10"></path>
+                        </svg>
+                        <span>**오후 9시**: 숙소 체크인 후 첫 타파스 맛보기</span>
+                    </li>
+                </ul>
+            </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
-                <!-- Summary of Key Info - Reorganized -->
-                <div class="md:col-span-2 text-center">
-                    <!-- Major Cities at the top -->
-                    <div class="text-center">
-                        <h4 class="font-extrabold text-indigo-800 text-2xl md:text-3xl mb-2">주요 도시</h4>
-                        <p class="text-gray-700 text-lg md:text-xl font-medium">마드리드 → 톨레도 → 바르셀로나 → 지로나 → 몬세라트</p>
-                    </div>
-
-                    <!-- Other Info below -->
-                    <div class="bg-indigo-50 p-6 rounded-xl space-y-4 mt-6">
-                        <div class="flex flex-col items-center">
-                            <h4 class="font-bold text-indigo-800 text-lg">총 여행 기간</h4>
-                            <p class="text-gray-700 text-3xl font-extrabold">11일 (10박)</p>
-                        </div>
-                        <div class="flex flex-col items-center mt-4">
-                            <h4 class="font-bold text-indigo-800 text-lg">예상 비용 </h4>
-                            <p class="text-gray-700 text-2xl font-bold">₩ 2,595,000 ~ 4,320,000</p>
-                        </div>
-                    </div>
+            <!-- Day 2 -->
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 2</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">10월 26일 (토) | 마드리드 도보 투어 및 미술관 투어</span>
+                </div>
+                <ul class="space-y-3 text-gray-600 mb-4">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오전 10시**: **마드리드 왕궁** 외관 관람</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-museum" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 22V10a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12"></path>
+                            <path d="M20 22V15a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7"></path>
+                            <path d="M22 22V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v15"></path>
+                        </svg>
+                        <span>**오후 12시**: **프라도 미술관** 관람 (고야, 벨라스케스 작품 집중 감상)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-museum" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 22V10a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12"></path>
+                            <path d="M20 22V15a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7"></path>
+                            <path d="M22 22V7a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v15"></path>
+                        </svg>
+                        <span>**오후 5시**: **티센 보르네미사 미술관** 관람</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-food" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path>
+                            <path d="M12 18V6"></path>
+                            <path d="M15 10H9"></path>
+                            <path d="M15 14H9"></path>
+                        </svg>
+                        <span>**오후 7시**: **레이나 소피아 미술관**으로 이동하여 **'게르니카'** 작품만 집중 관람 후 **산 미겔 시장**에서 저녁 식사</span>
+                    </li>
+                </ul>
+                <div class="tip-box p-4 rounded-lg text-sm text-gray-700">
+                    <p class="font-bold mb-2">💡 Tip</p>
+                    <p>마드리드 3대 미술관을 효율적으로 관람하고 싶다면 **'파세오 델 아르테 카드(Paseo del Arte Card)'**를 구매하세요. 프라도, 티센, 레이나 소피아 미술관을 모두 입장할 수 있는 통합 티켓으로, 개별 구매보다 훨씬 저렴하고 시간을 아낄 수 있습니다.</p>
                 </div>
             </div>
 
-            <!-- Travel Route Map -->
-   <div class="flex justify-center my-8">
-    <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d38865.738127419136!2d-3.7166547190477463!3d40.43795679956488!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422997800a604b%3A0x63345e6123e73812!2sMadrid%2C%20Spain!5e0!3m2!1sen!2skr!4v1698307238217!5m2!1sen!2skr"
-        width="100%"
-        height="450"
-        style="border:0;"
-        allowfullscreen=""
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        class="rounded-xl shadow-lg w-full max-w-2xl mx-auto"
-    ></iframe>
-</div>
-        </section>
-
-        <!-- Booking Info Section -->
-        <section id="booking-info" class="card hidden">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">예약 정보</h2>
-
-            <!-- Accommodation Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>숙박 (Accommodation)</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>도시</th>
-                                    <th>체크인 날짜</th>
-                                    <th>체크아웃 날짜</th>
-                                    <th>숙박 일수</th>
-                                    <th>숙소 위치 추천</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>마드리드</td>
-                                    <td>10/25 (금)</td>
-                                    <td>10/27 (일)</td>
-                                    <td>2박</td>
-                                    <td>솔(Sol) 광장 또는 마요르(Mayor) 광장 근처</td>
-                                </tr>
-                                <tr>
-                                    <td>톨레도</td>
-                                    <td>10/27 (일)</td>
-                                    <td>10/28 (월)</td>
-                                    <td>1박</td>
-                                    <td>구시가지 내</td>
-                                </tr>
-                                <tr>
-                                    <td>바르셀로나 (1차)</td>
-                                    <td>10/28 (월)</td>
-                                    <td>10/31 (목)</td>
-                                    <td>3박</td>
-                                    <td>에이샴플라(Eixample) 또는 고딕 지구 근처</td>
-                                </tr>
-                                <tr>
-                                    <td>지로나</td>
-                                    <td>10/31 (목)</td>
-                                    <td>11/01 (금)</td>
-                                    <td>1박</td>
-                                    <td>구시가지 내 또는 강변</td>
-                                </tr>
-                                <tr>
-                                    <td>바르셀로나 (2차)</td>
-                                    <td>11/01 (금)</td>
-                                    <td>11/04 (월)</td>
-                                    <td>3박</td>
-                                    <td>에이샴플라(Eixample) 또는 고딕 지구 근처</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </details>
-
-            <!-- Train Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>기차 (Train)</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>날짜</th>
-                                    <th>구간</th>
-                                    <th>소요시간</th>
-                                    <th>출발/도착 시간</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>10/27 (일)</td>
-                                    <td>마드리드 → 톨레도</td>
-                                    <td>약 30분</td>
-                                    <td>오전 9시 이전 출발 권장</td>
-                                </tr>
-                                <tr>
-                                    <td>10/28 (월)</td>
-                                    <td>톨레도 → 마드리드</td>
-                                    <td>약 30분</td>
-                                    <td>오전 10시 이전 출발 권장</td>
-                                </tr>
-                                <tr>
-                                    <td>10/28 (월)</td>
-                                    <td>마드리드 → 바르셀로나</td>
-                                    <td>2시간 30분 ~ 3시간</td>
-                                    <td>오후 늦게 출발</td>
-                                </tr>
-                                <tr>
-                                    <td>11/02 (토)</td>
-                                    <td>바르셀로나 → 몬세라트</td>
-                                    <td>약 1시간 30분</td>
-                                    <td>오전 9시 이전 출발 권장</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </details>
-            
-            <!-- Rent-a-Car Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>렌터카 (Rental Car)</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>날짜</th>
-                                    <th>대여/반납</th>
-                                    <th>구간</th>
-                                    <th>추천 지점</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>10/31 (목)</td>
-                                    <td>대여</td>
-                                    <td>바르셀로나 시내 외곽 지점</td>
-                                    <td>바르셀로나 산츠(Sants) 기차역 근처 지점</td>
-                                </tr>
-                                <tr>
-                                    <td>11/01 (금)</td>
-                                    <td>반납</td>
-                                    <td>바르셀로나 시내 외곽 지점</td>
-                                    <td>바르셀로나 산츠(Sants) 기차역 근처 지점</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </details>
-
-            <!-- Tickets Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>공연 및 미술관 티켓 (Tickets)</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>날짜</th>
-                                    <th>티켓 종류</th>
-                                    <th>비고</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>10/26 (토)</td>
-                                    <td>프라도 미술관</td>
-                                    <td>여행 1~2개월 전부터 온라인 사전 예매 필수.</td>
-                                </tr>
-                                <tr>
-                                    <td>10/26 (토)</td>
-                                    <td>플라멩코 공연</td>
-                                    <td>여행 1~2개월 전부터 온라인 사전 예매 권장.</td>
-                                </tr>
-                                <tr>
-                                    <td>10/29 (화)</td>
-                                    <td>사그라다 파밀리아 성당</td>
-                                    <td>여행 1~2개월 전부터 온라인 사전 예매 필수.</td>
-                                </tr>
-                                <tr>
-                                    <td>10/29 (화)</td>
-                                    <td>구엘 공원</td>
-                                    <td>여행 1~2개월 전부터 온라인 사전 예매 필수.</td>
-                                </tr>
-                                <tr>
-                                    <td>10/30 (수)</td>
-                                    <td>몬주익 마법의 분수 쇼</td>
-                                    <td>운영 일정 사전 확인 (예약 불필요)</td>
-                                </tr>
-                                <tr>
-                                    <td>11/02 (토)</td>
-                                    <td>몬세라트 소년 합창단 공연</td>
-                                    <td>공연 일정 사전 확인 (예약 불필요)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </details>
-
-            <!-- Luggage Path Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>짐 이동 경로 (Luggage Path)</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>날짜</th>
-                                    <th>장소</th>
-                                    <th>짐 상태</th>
-                                    <th>비고</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>10/25 (금)</td>
-                                    <td>마드리드</td>
-                                    <td>짐 풀기</td>
-                                    <td>숙소 체크인 후 마드리드에 짐 보관</td>
-                                </tr>
-                                <tr>
-                                    <td>10/26 (토)</td>
-                                    <td>마드리드</td>
-                                    <td>짐 보관</td>
-                                    <td>마드리드 숙소에 짐 보관</td>
-                                </tr>
-                                <tr>
-                                    <td>10/27 (일)</td>
-                                    <td>마드리드 → 톨레도</td>
-                                    <td>짐 이동</td>
-                                    <td>마드리드 숙소 체크아웃 후 톨레도로 짐 이동</td>
-                                </tr>
-                                <tr>
-                                    <td>10/28 (월)</td>
-                                    <td>톨레도 → 마드리드 → 바르셀로나</td>
-                                    <td>짐 이동 및 보관</td>
-                                    <td>톨레도 숙소 체크아웃 후 아토차역 짐 보관소에 잠시 맡김. 마드리드 구경 후 바르셀로나로 이동</td>
-                                </tr>
-                                <tr>
-                                    <td>10/29-30 (화/수)</td>
-                                    <td>바르셀로나</td>
-                                    <td>짐 보관</td>
-                                    <td>바르셀로나 숙소에 짐 보관</td>
-                                </tr>
-                                <tr>
-                                    <td>10/31 (목)</td>
-                                    <td>바르셀로나 → 지로나</td>
-                                    <td>짐 이동</td>
-                                    <td>바르셀로나 숙소 체크아웃 후 렌터카로 지로나 이동</td>
-                                </tr>
-                                <tr>
-                                    <td>11/01 (금)</td>
-                                    <td>지로나 → 바르셀로나</td>
-                                    <td>짐 이동</td>
-                                    <td>지로나 숙소 체크아웃 후 렌터카로 바르셀로나 이동</td>
-                                </tr>
-                                <tr>
-                                    <td>11/02-03 (토/일)</td>
-                                    <td>바르셀로나</td>
-                                    <td>짐 보관</td>
-                                    <td>바르셀로나 숙소에 짐 보관</td>
-                                </tr>
-                                <tr>
-                                    <td>11/04 (월)</td>
-                                    <td>바르셀로나 공항</td>
-                                    <td>짐 이동</td>
-                                    <td>숙소 체크아웃 후 공항으로 짐 이동</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </details>
-        </section>
-
-        <!-- Detailed Itinerary Section -->
-        <section id="itinerary" class="card hidden">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">일자별 상세 일정</h2>
-
-            <!-- Day 1 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 1 (10월 25일, 금) | 마드리드 도착 및 휴식</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li><b>마드리드 바라하스 국제공항(MAD)</b>에 도착하여 입국 수속을 합니다.</li>
-                    <li>공항버스나 공항철도(Metro)를 이용하여 시내 숙소로 이동합니다.</li>
-                    <li>숙소 체크인 후, 근처에서 간단한 저녁 식사를 하고 장거리 비행의 피로를 풉니다.</li>
-                </ul>
-                <p class="mt-4 text-sm md:text-base"><b>숙소 및 교통편:</b></p>
-                <p class="mt-2 text-sm md:text-base">추천 숙소 위치: 솔(Sol) 광장 또는 마요르(Mayor) 광장 근처. 주요 관광지를 도보로 이동하기 편리하고, 대중교통 접근성이 뛰어납니다. 공항-시내 이동: 공항버스(Exprés Aeropuerto)를 이용하면 솔 광장 근처의 시벨레스 광장까지 쉽게 갈 수 있습니다.</p>
-            </section>
-
-            <!-- Day 2 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 2 (10월 26일, 토) | 마드리드 도보 여행: 프라도 미술관 & 플라멩코</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>오전부터 오후까지 프라도 미술관에서 스페인 거장인 고야, 벨라스케스, 엘 그레코의 작품을 중심으로 감상합니다.</li>
-                    <li>미술관 관람 후, 레티로 공원을 산책하며 여유를 즐깁니다.</li>
-                    <li>저녁: 산 미겔 시장으로 이동하여 다양한 종류의 타파스를 맛보거나, 현지 레스토랑에서 저녁 식사를 합니다. 이후 마드리드의 열정적인 플라멩코 공연을 관람하며 특별한 밤을 보냅니다.</li>
-                </ul>
-                <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>프라도 미술관은 관람객이 많으므로 온라인 사전 예매가 필수입니다.</li>
-                    <li>하루 종일 걷는 일정이므로 편안한 신발을 준비하세요.</li>
-                    <li>플라멩코 공연은 인기가 많으니 미리 온라인으로 예약해두는 것이 좋습니다.</li>
-                </ul>
-            </section>
-
             <!-- Day 3 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 3 (10월 27일, 일) | 톨레도 당일치기</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>오전: 마드리드 아토차(Atocha) 역에서 고속 열차(AVE)를 타고 톨레도로 이동합니다 (약 30분 소요).</li>
-                    <li>톨레도 도착 후 톨레도 대성당 주변의 고풍스러운 골목을 거닐며 여유를 즐깁니다.</li>
-                    <li>저녁: 톨레도 야경을 감상하며 낭만적인 밤을 보냅니다.</li>
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 3</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">10월 27일 (일) | 톨레도 1박 2일 여행 (가볍게 출발)</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-train" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 16H3"></path>
+                            <path d="M15 8l6 8-6 8"></path>
+                            <path d="M9 8l-6 8 6 8"></path>
+                        </svg>
+                        <span>**오전 9시**: 마드리드 아토차 역으로 이동</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-hotel" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L12 21"></path>
+                            <path d="M8 2L8 15a4 4 0 0 0 4 4h0a4 4 0 0 0 4-4L16 2"></path>
+                        </svg>
+                        <span>**오전 10시**: **아토차 역 짐 보관소(Consigna)**에 캐리어 맡기기 (톨레도 1박을 위한 가벼운 짐만 챙기기)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-train" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 20h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"></path>
+                            <path d="M10 20v-4"></path>
+                            <path d="M14 20v-4"></path>
+                            <path d="M10 4h4"></path>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                        <span>**오전 11시**: 아토차 역에서 **고속열차(AVE)**를 타고 톨레도로 출발 (약 30분 소요)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 3시**: **톨레도 대성당**과 구시가지 골목 투어</span>
+                    </li>
                 </ul>
-                <p class="mt-4 text-sm md:text-base"><b>숙소 및 교통편:</b></p>
-                <p class="mt-2 text-sm md:text-base">마드리드-톨레도 이동: 열차는 아토차 역에서 출발하며, 약 30분 만에 톨레도에 도착합니다. 매우 편리합니다.</p>
-            </section>
+            </div>
 
             <!-- Day 4 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 4 (10월 28일, 월) | 바르셀로나 이동 및 마드리드 잠시 들르기</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>오전: 톨레도 숙소에서 체크아웃 후, 마드리드 아토차 역으로 돌아옵니다.</li>
-                    <li>짐 보관: 아토차 역 내에 있는 <b>짐 보관소(Consigna)</b>에 캐리어를 맡깁니다.</li>
-                    <li>점심: 역 근처에서 간단히 식사 후, 택시 또는 메트로를 이용해 마드리드 왕궁 외관을 잠시 감상합니다.</li>
-                    <li>늦은 오후: 아토차 역으로 돌아와 짐을 찾고 바르셀로나행 고속 열차(AVE)를 탑승합니다 (약 2시간 30분~3시간 소요).</li>
-                    <li>바르셀로나 도착 후 숙소 체크인 및 휴식.</li>
-                </ul>
-                <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
-                <p class="mt-2 text-sm md:text-base">이동이 많은 날이므로 피로도가 높을 수 있습니다. 바르셀로나 도착 후에는 무리한 일정을 잡지 마세요. 아토차 역 짐 보관소 위치를 미리 파악하고, 바르셀로나행 열차 시간도 여유롭게 잡아두면 편리합니다.</p>
-            </section>
-        
-            <!-- Day 5~6 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 5~6 (10월 29일~30일, 화, 수) | 바르셀로나 투어</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>Day 5 (가우디 투어): 사그라다 파밀리아 성당, 구엘 공원, 카사 바트요, 카사 밀라 등 가우디의 주요 건축물을 감상합니다.</li>
-                    <li>Day 6 (시내 탐방): 고딕 지구, 람블라스 거리, 보케리아 시장을 탐방하며 바르셀로나의 분위기를 즐깁니다. 저녁에는 몬주익 마법의 분수 쇼를 관람합니다 (운영 일정 확인 필수).</li>
-                </ul>
-                <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
-                <p class="mt-2 text-sm md:text-base">몬주익 마법의 분수쇼는 꼭 운영 일정을 미리 확인해야 합니다. 만약 운영하지 않는다면, 대신 고딕 지구의 좁은 골목길을 거닐며 분위기 좋은 바를 찾아보거나, 엘 본(El Born) 지역의 힙한 타파스 바에서 현지인처럼 밤을 즐기는 것도 좋은 추억이 될 거예요. 추천 숙소 위치: 에이샴플라(Eixample) 또는 고딕 지구 근처. 가우디 투어와 시내 탐방에 모두 용이합니다. 이동: 바르셀로나 시내에서는 메트로를 이용하는 것이 가장 효율적입니다.</p>
-            </section>
-
-            <!-- Day 7~8 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 7~8 (10월 31일~11월 1일, 목, 금) | 지로나 & 코스타 브라바 렌터카 투어</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>Day 7: 바르셀로나 시내 외곽의 렌터카 지점에서 차량을 대여하여 지로나는 중세 구시가지와 지로나는 대성당을 둘러본 후, 지로나에서 1박을 합니다.</li>
-                    <li>Day 8: 지로나 숙소 체크아웃 후, 코스타 브라바 해안을 따라 드라이브하며 아름다운 해변 마을을 둘러봅니다. 오후에 바르셀로나로 돌아와 렌터카를 반납합니다.</li>
-                </ul>
-                <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
-                <p class="mt-2 text-sm md:text-base">코스타 브라바 드라이브 시에는 토사 데 마르(Tossa de Mar), 카다케스(Cadaqués) 같은 유명한 곳 외에 숨겨진 작은 해변 마을을 찾아보는 것도 낭만적일 거예요.</p>
-            </section>
-        
-            <!-- Day 9 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 9 (11월 2일, 토) | 몬세라트 당일치기</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>바르셀로나에서 대중교통 또는 현지 투어 상품을 이용해 몬세라트로 이동합니다.</li>
-                    <li>몬세라트 수도원, 검은 성모 마리아상을 관람하고, 운이 좋으면 소년 합창단 공연을 볼 수 있습니다 (공연 일정 사전 확인 필수).</li>
-                </ul>
-                <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
-                <p class="mt-2 text-sm md:text-base">몬세라트 이동 시 기차+푸니쿨라/케이블카 조합이 가장 편리합니다. 몬세라트 통합 티켓(Trans Montserrat)을 구매하면 효율적입니다.</p>
-            </section>
-
-            <!-- Day 10 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 10 (11월 3일, 일) | 바르셀로나 해변 산책 및 귀국 준비</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>오전: 여유롭게 숙소에서 체크아웃 후, 짐 보관소에 짐을 맡깁니다.</li>
-                    <li>오후: <b>바르셀로네타 해변(Platja de la Barceloneta)</b>을 거닐며 지중해의 따뜻한 햇살을 만끽합니다. 주변의 해산물 레스토랑에서 점심을 즐기는 것도 좋습니다.</li>
-                    <li>저녁: 바르셀로나 시내 숙소에서 마지막 밤을 보냅니다.</li>
-                </ul>
-                <p class="mt-4 text-sm md:text-base"><b>팁:</b></p>
-                <p class="mt-2 text-sm md:text-base">11월에도 바르셀로나 해변은 걷기에 좋은 날씨입니다. 귀국 전 공항까지는 최소 2~3시간 전 도착을 권장합니다.</p>
-
-            </section>
-
-            <!-- Day 11 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 11 (11월 4일, 월) | 귀국</h3>
-                <p class="text-sm md:text-base"><b>일정:</b></p>
-                <ul class="list-disc list-inside mt-2 space-y-1 text-sm md:text-base">
-                    <li>오전: 숙소에서 여유롭게 아침을 즐깁니다.</li>
-                    <li>점심: 숙소 근처에서 마지막 식사를 합니다.</li>
-                    <li>오후 1시: 바르셀로나 공항으로 이동하여 출국 수속을 밟고 인천으로 돌아옵니다.</li>
-                </ul>
-            </section>
-        </section>
-        
-        <!-- City Features Section -->
-        <section id="city-features" class="card hidden">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">도시별 특징</h2>
-
-            <!-- Madrid Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>마드리드</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto mb-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>대표 음식/특징</td>
-                                    <td>츄러스, 오징어튀김 샌드위치, 하몬, 타파스</td>
-                                </tr>
-                                <tr>
-                                    <td>대표 명소</td>
-                                    <td>마드리드 왕궁, 프라도 미술관, 마요르 광장, 시벨레스 광장</td>
-                                </tr>
-                                <tr>
-                                    <td>문화적 키워드</td>
-                                    <td>활기, 예술, 미식, 수도</td>
-                                </tr>
-                                <tr>
-                                    <td>팁</td>
-                                    <td>
-                                        <ul class="list-disc list-inside">
-                                            <li><p>마요르 광장, 푸에르타 델 솔은 소매치기 주의.</p></li>
-                                            <li><p>숨겨진 명소: 소로야 미술관, 라사로 갈디아노 미술관.</p></li>
-                                            <li><p>시에스타 시간(오후 2~5시)을 고려해 동선을 짤 것.</p></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-sm md:text-base mb-2">마드리드는 스페인의 정치, 문화적 수도로서 끊임없이 활력이 넘치는 도시입니다. 이곳의 미식 문화는 그 다양성으로 유명하며, 특히 작은 접시에 담아 여러 음식을 맛보는 타파스 문화가 발달해 있습니다. 돼지고기 뒷다리를 소금에 절여 숙성시킨 스페인 대표 음식인 하몬(Jamón)은 그 풍미가 깊어 현지인들에게도 큰 사랑을 받습니다. 하몬은 크게 세라노와 이베리코 두 종류로 나뉘는데, 가격은 더 비싸지만 비린 맛이 덜하고 품질이 좋은 이베리코 하몬이 더 선호됩니다. 현지에서는 마트에서 이베리코 하몬과 와인, 그리고 멜론이나 수박을 함께 구매하여 숙소에서 여유롭게 즐기는 것이 최고의 조합으로 여겨집니다.</p>
-                    <p class="text-sm md:text-base mb-2">마드리드의 대표적인 대중적 맛집으로는 130년 전통을 자랑하며 24시간 영업하는 츄러스 전문점인 산 히네스(Chocolatería San Ginés)가 있습니다. 또한, 마드리드의 전통 음식인 대구튀김과 오징어튀김 샌드위치를 맛볼 수 있는 카사 라브라(Casa Labra)는 현지인이 추천하는 로컬 맛집으로 알려져 있습니다.</p>
-                    <p class="text-sm md:text-base mb-2">마드리드의 문화와 볼거리는 과거와 현재가 공존하는 모습을 보여줍니다. 스페인 왕실의 공식 행사가 열리는 웅장한 마드리드 왕궁(Palacio Real)은 그 자체로 마드리드 여행의 하이라이트로 꼽힙니다. 1819년에 개관하여 3만 점에 달하는 방대한 작품을 소장하고 있는 프라도 미술관(Museo del Prado)은 예술 애호가라면 반드시 방문해야 할 장소입니다. 도시의 활기를 느끼고 싶다면 마요르 광장(Plaza Mayor)과 푸에르타 델 솔(Puerta del Sol)과 같은 중심 광장을 거닐어보는 것이 좋습니다.</p>
-                    <p class="text-sm md:text-base mb-2">하지만 인파가 많은 곳을 피해 여유로운 시간을 보내고자 한다면 숨겨진 명소들을 고려할 수 있습니다. 시벨레스 광장(Plaza de Cibeles)은 마드리드를 상징하는 아름다운 건축물이 모여 있는 곳으로, 미라도르 전망대에서는 도시의 광활한 전경을 감상할 수 있습니다. 인상파 화가 호아킨 소로야의 작품과 직접 설계한 아름다운 정원을 볼 수 있는 소로야 미술관(Sorolla Museum) 이나, 고야, 벨라스케스 등 거장들의 작품을 소장한 라사로 갈디아노 미술관(Lázaro Galdiano Museum)은 인파가 적어 한적하게 예술을 즐기기에 좋은 장소들입니다.</p>
-                    <p class="text-sm md:text-base mb-2">마드리드 여행 시에는 몇 가지 유의할 점이 있습니다. 기차역, 메트로, 버스터미널, 그리고 마요르 광장과 같은 주요 관광지는 소매치기 범죄가 빈번하게 발생하는 곳입니다. 가방을 앞으로 메고, 현금은 소량만 소지하며 항상 주의를 기울이는 것이 중요합니다. 스페인의 낮잠 풍습인 시에스타(Siesta)는 대도시에서는 점차 사라지는 추세지만, 소도시나 일부 전통 상점은 오후 늦은 시간까지 문을 닫는 경우가 있으므로 사전에 확인하는 것이 좋습니다. 또한, 스페인에서는 지정된 장소가 아닌 길거리에서 술을 마시는 것이 금지되어 있으며, 이를 어길 시 높은 벌금이 부과되니 주의해야 합니다.</p>
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 4</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">10월 28일 (월) | 톨레도에서 세비야로 이동</span>
                 </div>
-            </details>
-
-            <!-- Toledo Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>톨레도</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto mb-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>대표 음식/특징</td>
-                                    <td>메뉴 델 디아(Menu del Día)</td>
-                                </tr>
-                                <tr>
-                                    <td>대표 명소</td>
-                                    <td>톨레도 대성당, 알카사르, 산 마르틴 다리, 미라도르 전망대</td>
-                                </tr>
-                                <tr>
-                                    <td>문화적 키워드</td>
-                                    <td>역사, 중세, 세 종교의 공존</td>
-                                </tr>
-                                <tr>
-                                    <td>팁</td>
-                                    <td>
-                                        <ul class="list-disc list-inside">
-                                            <li><p>미라도르 전망대는 미니 기차 대신 시내버스를 이용하면 더 여유롭게 즐길 수 있음.</p></li>
-                                            <li><p>도시 곳곳에 있는 에스컬레이터를 활용해 언덕 지형의 이동 피로를 줄일 것.</p></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-sm md:text-base mb-2">마드리드에서 버스로 약 1시간 거리에 위치한 톨레도는 과거 스페인의 수도였으며, 기독교, 유대교, 무슬림 유산이 혼합된 독특한 문화적 분위기를 간직한 도시입니다. 톨레도 여행의 만족도는 단순히 '어디를 갈 것인가'가 아니라 '어떻게 이동하고 얼마나 여유를 가질 것인가'에 따라 크게 달라질 수 있습니다. 톨레도 대성당, 알카사르 데 톨레도, 산 마르틴 다리 등 유서 깊은 유적지들이 주요 볼거리로 꼽힙니다.</p>
-                    <p class="text-sm md:text-base mb-2">톨레도의 필수 방문 명소 중 하나는 도시 전체를 조망할 수 있는 미라도르 전망대(Mirador del Valle)입니다. 이곳은 인생 사진을 남길 수 있는 최고의 포토존으로 알려져 있습니다. 전망대로 가는 방법에는 미니 기차, 투어 버스, 시내버스 등이 있는데, 미니 기차는 전망대에 단 10분만 정차하기 때문에 여유로운 사진 촬영이나 풍경 감상을 원하는 여행자에게는 적합하지 않습니다. 반면, 배차 간격은 길지만 저렴하고 여유롭게 시간을 보낼 수 있는 시내버스가 더 효과적인 선택이 될 수 있습니다. 톨레도는 언덕이 많고 경사가 심한 지형이므로, 도시 곳곳에 설치된 에스컬레이터를 활용하면 더운 날씨에도 이동 피로를 크게 줄일 수 있습니다.</p>
-                    <p class="text-sm md:text-base mb-2">저렴한 가격으로 코스 요리를 즐길 수 있는 메뉴 델 디아(Menu del Día)는 톨레도의 대표적인 식문화입니다.</p>
-                </div>
-            </details>
-
-            <!-- Barcelona Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>바르셀로나</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto mb-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>대표 음식/특징</td>
-                                    <td>꿀대구, 감바스, 해산물, 타파스</td>
-                                </tr>
-                                <tr>
-                                    <td>대표 명소</td>
-                                    <td>사그라다 파밀리아, 고딕 지구, 람블라스 거리, 팔라우 데 라 무시카 카탈라나</td>
-                                </tr>
-                                <tr>
-                                    <td>문화적 키워드</td>
-                                    <td>가우디, 예술, 지중해, 과잉 관광</td>
-                                </tr>
-                                <tr>
-                                    <td>팁</td>
-                                    <td>
-                                        <ul class="list-disc list-inside">
-                                            <li><p>람블라스 거리 등 관광객 밀집 지역은 소매치기 주의.</p></li>
-                                            <li><p>과잉 관광을 피해 숨겨진 명소(초콜릿 박물관, 엔칸츠 시장)를 방문하는 것도 좋은 방법.</p></li>
-                                            <li><p>유네스코 세계문화유산인 팔라우 데 라 무시카 카탈라나 방문 추천.</p></li>
-                                        </ul>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-sm md:text-base mb-2">바르셀로나는 안토니 가우디의 독특한 예술혼이 도시 곳곳에 스며들어 있으며, 지중해와 맞닿아 있어 풍부한 해산물 요리를 즐길 수 있는 곳입니다. 스페인의 대표적인 식문화인 타파스 외에도, 꿀대구, 감바스 알 아히요, 뿔보(문어 요리), 맛조개 등 해산물 타파스가 특히 발달해 있습니다.</p>
-                    <p class="text-sm md:text-base mb-2">바르셀로나의 대표적인 꿀대구 맛집으로는 라 플라우타(La Flauta)와 시우다드 콘달(Ciudad Condal)이 있습니다. 라 플라우타는 바르셀로나 3대 꿀대구 맛집 중 하나로, '가장 촉촉하다'는 평을 받으며 구글 평점 4.5점으로 현지인과 여행객 모두에게 인기가 많습니다. 시우다드 콘달은 '인생 감바스'와 함께 '솜사탕처럼 입에서 녹는' 꿀대구가 시그니처 메뉴로 꼽힙니다. 전통 카탈루냐 요리를 경험하고 싶다면 약 200년 역사의 7 포르테스(7 Portes)나, '봄바'라는 감자 크로켓의 원조로 알려진 라 코바 푸마다(La Cova Fumada)를 방문할 수 있습니다.</p>
-                    <p class="text-sm md:text-base mb-2">바르셀로나의 인기 명소는 가우디의 미완성 대작인 사그라다 파밀리아, 활기 넘치는 람블라스 거리와 보케리아 시장, 그리고 중세의 정취가 남아 있는 고딕 지구가 있습니다. 그러나 바르셀로나의 여행 만족도는 관광객 밀집 지역을 얼마나 현명하게 피하는가에 따라 크게 달라질 수 있습니다. 현지 주민들은 관광객 유입으로 인한 임대료 상승, 공공장소 혼잡 등으로 시위를 벌이는 등 과잉 관광에 대한 피로를 강하게 표출하고 있습니다. 라 람블라나 바르셀로네타 해변과 같은 주요 핫스팟은 현지인들이 거의 방문하지 않는 '관광객 함정'으로 여겨지기도 합니다.</p>
-                    <p class="text-sm md:text-base mb-2">이러한 문제를 해결하고 여행의 질을 높이기 위한 전략으로 숨겨진 명소 탐색이 추천됩니다. 사그라다 파밀리아를 초콜릿으로 재현한 초콜릿 박물관, 빈티지 물건을 구경할 수 있는 엔칸츠 시장, 도시의 괴담을 체험하는 바르셀로나 고스트 투어 등은 색다른 경험을 제공합니다. 또한, 유네스코 세계문화유산인 팔라우 데 라 무시카 카탈라나(Palau de la Música Catalana)는 인기 명소 투어에서는 종종 놓치는 아름다운 건축물입니다.</p>
-                </div>
-            </details>
-
-            <!-- Girona Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>지로나</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto mb-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>대표 음식/특징</td>
-                                    <td>로컬 시장 음식</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-sm md:text-base mb-2">바르셀로나에서 기차로 약 40분 거리에 위치한 지로나는 중세 시대의 매력을 고스란히 간직한 도시입니다. 드라마 '왕좌의 게임' 촬영지로 유명한 지로나 대성당과 아랍 목욕탕은 이곳의 대표적인 인기 명소입니다. 특히 지로나 성벽(Passeig de la Muralla)은 도시 전체를 둘러싸고 있어, 성벽 위를 걸으며 탁 트인 전경을 즐길 수 있습니다. 파리 에펠탑을 만든 구스타브 에펠이 건설한 붉은 에펠 다리(Eiffel Bridge) 또한 독특한 볼거리입니다.</p>
-                    <p class="text-sm md:text-base mb-2">지로나는 여행자들의 동선에 따라 경험의 질이 달라질 수 있습니다. 많은 여행객들이 지로나 대성당에서 성벽 걷기를 시작하지만, 이 동선은 햇빛을 정면으로 받아 눈부심을 느낄 수 있습니다. 대신 다른 방향에서 걷기를 시작하면 더 좋은 경치를 여유롭게 즐길 수 있습니다. 음식으로는 지로나에서 가장 큰 로컬 시장인 메르카 델레오(Mercat de Lleó)에서 신선한 식재료와 간식을 맛보거나, 많은 레스토랑과 카페가 밀집한 인데펜덴시아 광장(Placa de la Independencia)에서 점심 휴식을 취하는 것이 현지 분위기를 느끼는 좋은 방법입니다.</p>
-                </div>
-            </details>
-
-            <!-- Montserrat Accordion -->
-            <details class="accordion-item">
-                <summary class="accordion-summary">
-                    <span>몬세라트</span>
-                    <span class="accordion-icon">▶</span>
-                </summary>
-                <div class="accordion-content">
-                    <div class="overflow-x-auto mb-4">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>항목</th>
-                                    <th>내용</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>대표 음식/특징</td>
-                                    <td>수도원 식당</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <p class="text-sm md:text-base mb-2">몬세라트는 신비로운 기암절벽 속에 자리한 수도원으로, 바르셀로나 근교에서 가장 영감을 주는 여행지 중 하나입니다. 수도원의 핵심 볼거리는 검은 성모 마리아상(Black Madonna)으로, 소원을 빌면 이루어진다는 전설 때문에 긴 대기줄이 형성되기도 합니다. </p>
-                    <p class="text-sm md:text-base mb-2">몬세라트의 매력은 자연 경관을 즐기는 하이킹 코스에 있습니다. 가벼운 난이도의 하이킹을 원한다면 산조안 예배당(Sant Joan Chapel) 코스를 추천합니다. 반면, 막달레나(Magdalena) 하이킹 코스는 난이도가 급격히 높아지는 등산 코스이므로 초보 여행자에게는 여행 만족도를 떨어뜨릴 수 있어 피하는 것이 좋습니다.</p>
-                    <p class="text-sm md:text-base mb-2">몬세라트는 단체 투어와 자유 여행이라는 두 가지 선택지가 있습니다. 단체 투어는 이동의 편의를 제공하지만, 원치 않는 긴 역사 강의나 빡빡한 일정으로 인해 피로도를 높일 수 있습니다. 이러한 투어는 이동 시간이 매우 길고 다음 코스로 넘어가는 압박감이 있어, 여행의 여유를 방해하는 요인이 될 수 있습니다. 따라서 자신의 체력과 여행 스타일에 맞춰 자유도를 중시할지, 편의성을 중시할지 명확히 결정하는 것이 중요합니다.</p>
-                </div>
-            </details>
-        </section>
-
-        <!-- Food Section -->
-        <section id="food" class="card hidden">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">먹자</h2>
-
-            <!-- Day 1 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 1 (10월 25일, 금) | 마드리드 도착 및 휴식</h3>
-                <p class="mt-2 text-sm md:text-base">장거리 비행으로 피곤하실 첫날은 무리하지 않고 숙소 근처에서 간단히 스페인의 맛을 느껴보는 것을 추천합니다. 스페인의 대표적인 돼지고기 가공육인 <span class="text-red-600 font-bold">하몬(Jamón)</span>은 그 풍미가 깊어 현지인들에게도 큰 사랑을 받습니다. 특히 <span class="text-red-600 font-bold">이베리코 하몬</span>은 비린 맛이 덜하고 품질이 좋아 와인과 함께 즐기기에 좋은 조합입니다. 마드리드 전통 음식인 <span class="text-red-600 font-bold">대구튀김</span>이나 <span class="text-red-600 font-bold">오징어튀김 샌드위치</span>를 파는 로컬 맛집인 '카사 라브라(Casa Labra)'를 방문해 보시는 것도 좋습니다.</p>
-            </section>
-            
-            <!-- Day 2 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 2 (10월 26일, 토) | 마드리드 도보 여행: 프라도 미술관 & 플라멩코</h3>
-                <p class="mt-2 text-sm md:text-base">미술관과 공원 산책으로 하루를 보낸 후 저녁에는 산 미겔 시장에서 다양한 <span class="text-red-600 font-bold">타파스</span> 경험을 해보세요. 타파스는 '작은 접시 위에 올려진 모든 음식'을 일컫는 말로, 소량으로 여러 가지 음식을 맛볼 수 있는 장점이 있습니다.</p>
-                <p class="mt-2 text-sm md:text-base"><span class="text-red-600 font-bold">파타타스 브라바스(매콤한 소스를 얹은 감자튀김)</span>나 <span class="text-red-600 font-bold">토르티야 데 파타타(스페인식 감자 오믈렛)</span>, <span class="text-red-600 font-bold">깔라마레스 아 라 로마나(오징어튀김)</span>와 같은 대표적인 타파스 메뉴를 경험해 보는 것을 추천합니다.</p>
-            </section>
-            
-            <!-- Day 3 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 3 (10월 27일, 일) | 톨레도 당일치기</h3>
-                <p class="mt-2 text-sm md:text-base">톨레도에서는 <span class="text-red-600 font-bold">메뉴 델 디아(Menu del Día)</span>를 드셔보세요. 이는 전식, 본식, 후식으로 구성된 오늘의 정식으로, 저렴한 가격에 푸짐한 코스 요리를 즐길 수 있습니다. 많은 현지인들이 점심으로 메뉴 델 디아를 즐기기 때문에, 톨레도의 소박한 식문화를 경험하기에 좋은 기회가 될 것입니다.</p>
-            </section>
-
-            <!-- Day 4 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 4 (10월 28일, 월) | 바르셀로나 이동 및 마드리드 잠시 들르기</h3>
-                <p class="mt-2 text-sm md:text-base">톨레도에서 마드리드로 돌아와 늦은 오후 기차로 바르셀로나로 이동하는 날입니다. 아토차 역 근처에서 간단한 점심을 해결해야 한다면, 마드리드의 상징과도 같은 <span class="text-red-600 font-bold">오징어튀김 샌드위치(Bocadillo de Calamares)</span>를 맛보세요. 간단하지만 든든하게 한 끼를 해결할 수 있습니다.</p>
-            </section>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-train" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14 20h2a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h2"></path>
+                            <path d="M10 20v-4"></path>
+                            <path d="M14 20v-4"></path>
+                            <path d="M10 4h4"></path>
+                            <circle cx="12" cy="12" r="2"></circle>
+                        </svg>
+                        <span>**오후 2시**: **마드리드 아토차 역**에서 **고속열차(AVE)**를 타고 세비야로 출발 (약 2시간 30분 소요)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 6시**: **스페인 광장** 방문 및 인생샷 남기기</span>
+                    </li>
+                </ul>
+            </div>
             
             <!-- Day 5 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 5 (10월 29일, 화) | 바르셀로나 투어</h3>
-                <p class="mt-2 text-sm md:text-base">바르셀로나는 지중해와 가까워 해산물 요리가 풍부합니다. 가우디 투어로 하루를 시작한다면, 점심은 가우디 작품 근처에서 <span class="text-red-600 font-bold">감바스 알 아히요(Gambas al Ajillo)</span>와 <span class="text-red-600 font-bold">꿀대구(Codfish with Honey)</span>를 경험해 보는 것이 좋습니다. 꿀대구 맛집으로 현지인과 여행객 모두에게 인기 있는 '시우다드 콘달(Ciudad Condal)'이나 '라 플라우타(La Flauta)'를 추천합니다. 저녁에는 약 200년 역사를 자랑하는 레스토랑 '7 포르테스(7 Portes)'에서 전통 <span class="text-red-600 font-bold">파에야</span>를 맛보며 특별한 저녁 식사를 즐겨보세요.</p>
-            </section>
-            
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 5</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">10월 29일 (화) | 세비야 시내 투어</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오전 10시**: **세비야 대성당**과 **히랄다 탑** 투어</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 3시**: **세비야 왕궁(알카사르)** 투어</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 6시**: 마리아 루이사 공원 산책</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-food" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z"></path>
+                            <path d="M12 18V6"></path>
+                            <path d="M15 10H9"></path>
+                            <path d="M15 14H9"></path>
+                        </svg>
+                        <span>**오후 8시**: **플라멩코 공연** 관람(선택 사항)</span>
+                    </li>
+                </ul>
+            </div>
+
             <!-- Day 6 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 6 (10월 30일, 수) | 바르셀로나 시내 탐방</h3>
-                <p class="mt-2 text-sm md:text-base">고딕 지구, 람블라스 거리를 둘러보는 날에는 활기찬 분위기의 보케리아 시장을 방문해 보세요. 시장에서 파는 신선한 <span class="text-red-600 font-bold">과일 주스</span>를 맛보거나, 즉석에서 조리해주는 <span class="text-red-600 font-bold">해산물 요리</span>를 즐기는 것도 좋은 방법입니다. 저녁에는 보른 지구에 있는 '라 코바 푸마다(La Cova Fumada)'에서 '<span class="text-red-600 font-bold">봄바(bomba)</span>'라는 독특한 감자 크로켓을 맛보며 현지 분위기를 느껴보는 것을 추천합니다.</p>
-            </section>
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 6</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">10월 30일 (수) | 안달루시아 드라이브의 시작 (세비야 → 론다 → 그라나다)</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-car" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-4-4H9"></path>
+                            <circle cx="19" cy="7" r="4"></circle>
+                        </svg>
+                        <span>**오전 9시**: **세비야 시내 렌터카 지점**에서 렌터카 대여</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-car" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-4-4H9"></path>
+                            <circle cx="19" cy="7" r="4"></circle>
+                        </svg>
+                        <span>**오전 10시**: **론다**로 출발 (약 1시간 40분 소요)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오전 11시 40분**: 론다 도착 후 **누에보 다리** 관람 및 사진 촬영</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-car" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-4-4H9"></path>
+                            <circle cx="19" cy="7" r="4"></circle>
+                        </svg>
+                        <span>**오후 2시 30분**: **그라나다**로 출발 (약 2시간 소요)</span>
+                    </li>
+                </ul>
+            </div>
             
             <!-- Day 7 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 7~8 (10월 31일~11월 1일, 목, 금) | 지로나 & 코스타 브라바 렌터카 투어</h3>
-                <p class="mt-2 text-sm md:text-base">Day 7 (지로나): 지로나에서는 가장 큰 로컬 시장인 메르카 델레오(Mercat de Lleó)에 방문하여 신선한 <span class="text-red-600 font-bold">식재료나 조리된 음식</span>을 맛볼 수 있습니다. 시장이 아니더라도 많은 레스토랑과 카페가 밀집해 있는 인데펜덴시아 광장에서 점심을 해결하는 것도 좋습니다.</p>
-                <p class="mt-2 text-sm md:text-base">Day 8 (코스타 브라바): 코스타 브라바는 해안을 따라 아름다운 마을들이 이어지는 곳입니다. 해안가 마을을 드라이브하면서 <span class="text-red-600 font-bold">해산물 요리</span>를 즐기는 것은 필수입니다. 싱싱한 <span class="text-red-600 font-bold">해산물 타파스</span>나 그날 잡은 <span class="text-red-600 font-bold">생선 구이</span>를 즐겨보세요.</p>
-            </section>
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 7</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">10월 31일 (목) | 그라나다 투어</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오전 9시 30분**: **알함브라 궁전 투어** (미리 예약한 나스르 궁전 입장 시간에 맞춰 방문)</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 7시**: **알바이신 지구** 산책 및 저녁 식사</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Day 8 -->
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 8</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">11월 1일 (금) | 바르셀로나로 이동</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-car" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-4-4H9"></path>
+                            <circle cx="19" cy="7" r="4"></circle>
+                        </svg>
+                        <span>**오전 10시**: **그라나다 공항**으로 이동하여 **렌터카 반납** 및 수속</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-plane" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 22h20L12 2zM12 2v20"></path>
+                        </svg>
+                        <span>**오후 1시**: 바르셀로나행 항공편 탑승</span>
+                    </li>
+                </ul>
+            </div>
             
             <!-- Day 9 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 9 (11월 2일, 토) | 몬세라트 당일치기</h3>
-                <p class="mt-2 text-sm md:text-base">몬세라트에서는 수도원 내부의 식당이나 기차역 근처에 있는 식당에서 식사를 할 수 있습니다. 하이킹 후에는 든든한 식사로 에너지를 보충하는 것을 추천합니다.</p>
-            </section>
-            
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 9</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">11월 2일 (토) | 바르셀로나 가우디 투어</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오전 10시**: **사그라다 파밀리아** 투어</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 12시 30분**: **구엘 공원** 방문</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 3시**: **카사 밀라**와 **카사 바트요** 등 가우디 건축물 투어</span>
+                    </li>
+                </ul>
+            </div>
+
             <!-- Day 10 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 10 (11월 3일, 일) | 바르셀로나 해변 산책 및 귀국 준비</h3>
-                <p class="mt-2 text-sm md:text-base">바르셀로네타 해변을 산책하는 일정에 맞춰, 점심은 바닷가 근처 레스토랑에서 <span class="text-red-600 font-bold">해산물 파에야(Paella)</span>를 즐겨보세요. 해산물과 쌀이 어우러져 든든하면서도 스페인 특유의 풍미를 느낄 수 있습니다. 만약 파에야가 지겹다면, 쌀 대신 숏 파스타를 넣은 <span class="text-red-600 font-bold">피데우아(Fideuà)</span>라는 요리도 좋은 대안이 될 수 있습니다.</p>
-            </section>
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 10</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">11월 3일 (일) | 바르셀로나 시내 탐방</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오전 10시**: **고딕 지구**와 **보케리아 시장** 방문</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 2시**: **몬주익 언덕**에서 바르셀로나 전경 감상</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-sight" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17.5 17.5l4.5 4.5"></path>
+                            <path d="M9 18c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"></path>
+                        </svg>
+                        <span>**오후 5시**: **바르셀로네타 해변** 산책</span>
+                    </li>
+                </ul>
+            </div>
 
             <!-- Day 11 -->
-            <section class="daily-itinerary-card bg-gray-50 p-4 rounded-xl border border-gray-200 mt-4">
-                <h3 class="text-lg md:text-xl font-semibold mb-2">Day 11 (11월 4일, 월) | 귀국</h3>
-                <p class="mt-2 text-sm md:text-base">마지막 날, 공항으로 떠나기 전 든든한 아침 식사를 하고 싶다면 스페인의 대표적인 아침 메뉴 중 하나인 <span class="text-red-600 font-bold">토르티야 데 파타타(Tortilla de Patata)</span>를 맛보세요. 감자와 양파를 넣어 만든 스페인식 오믈렛으로, 간단한 간식이나 샌드위치로도 즐길 수 있습니다.</p>
-            </section>
-        </section>
-
-        <!-- Budget & Tips Section -->
-        <section id="budget-tips" class="card hidden">
-            <h2 class="text-2xl md:text-3xl font-bold mb-4 md:mb-6 text-gray-900">여행 비용 & 팁</h2>
-
-            <!-- Budget Table -->
-            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">여행 비용 추산 (항공권 제외)</h3>
-            <div class="overflow-x-auto">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>항목</th>
-                            <th>대략적 비용</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>숙박 (10박)</td>
-                            <td>₩ 1,050,000 ~ 1,800,000</td>
-                        </tr>
-                        <tr>
-                            <td>기차 (AVE, R5)</td>
-                            <td>₩ 270,000 ~ 375,000</td>
-                        </tr>
-                        <tr>
-                            <td>렌터카 (2일)</td>
-                            <td>₩ 150,000 ~ 270,000</td>
-                        </tr>
-                        <tr>
-                            <td>티켓 및 액티비티</td>
-                            <td>₩ 225,000 ~ 375,000</td>
-                        </tr>
-                        <tr>
-                            <td>식비</td>
-                            <td>₩ 750,000 ~ 1,200,000</td>
-                        </tr>
-                        <tr>
-                            <td>기타 (시내 교통, 기념품)</td>
-                            <td>₩ 150,000 ~ 300,000</td>
-                        </tr>
-                        <tr class="font-bold">
-                            <td>총계</td>
-                            <td>₩ 2,595,000 ~ 4,320,000</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="mt-4 text-xs md:text-sm text-gray-600">※ 비용은 유로(€) 환율과 물가를 기반으로 추산된 것이며, 개인 소비 성향에 따라 변동될 수 있습니다.</p>
-
-            <!-- Weather & Attire -->
-            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">날씨 & 옷차림</h3>
-            <div class="bg-gray-50 p-4 md:p-6 rounded-xl border border-gray-200 text-sm md:text-base">
-                <p>10월 말 ~ 11월 초는 가을에서 초겨울로 넘어가는 시기입니다. 일교차가 크니 여러 겹 겹쳐 입는 옷차림이 가장 좋습니다.</p>
-                <ul class="list-disc list-inside mt-4 space-y-2">
-                    <li><strong>마드리드 & 톨레도 (내륙):</strong> 낮에는 쾌적하지만 밤에는 기온이 크게 떨어집니다. 얇은 니트, 가디건, <strong>얇은 코트</strong>나 <strong>경량 패딩</strong>을 챙기세요.</li>
-                    <li><strong>바르셀로나 & 지로나 (해안가):</strong> 낮에는 비교적 온화하고 따뜻합니다. 얇은 긴팔, 셔츠를 주로 입고, 바람이 불거나 비가 올 수 있으니 <strong>바람막이</strong>나 <strong>접는 우산</strong>을 준비하는 것이 좋습니다.</li>
+            <div class="day-card p-6 rounded-lg">
+                <div class="flex items-center mb-4">
+                    <h2 class="text-2xl font-bold text-gray-700">Day 11</h2>
+                    <span class="ml-2 text-lg text-gray-500 font-medium">11월 4일 (월) | 바르셀로나 출국</span>
+                </div>
+                <ul class="space-y-3 text-gray-600">
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-plane" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 22h20L12 2zM12 2v20"></path>
+                        </svg>
+                        <span>**오후 1시 30분**: 공항으로 출발</span>
+                    </li>
+                    <li class="flex items-center space-x-2">
+                        <svg class="icon icon-plane" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 2L2 22h20L12 2zM12 2v20"></path>
+                        </svg>
+                        <span>**오후 4시**: 한국행 항공편 탑승</span>
+                    </li>
                 </ul>
             </div>
+            
+        </div>
 
-            <!-- Other Tips -->
-            <h3 class="text-xl md:text-2xl font-semibold mt-6 mb-3">놓치기 쉬운 팁</h3>
-            <div class="bg-gray-50 p-4 md:p-6 rounded-xl border border-gray-200 text-sm md:text-base">
-                <ul class="list-disc list-inside space-y-2">
-                    <li><strong>스마트폰 인터넷:</strong> 현지 유심(SIM 카드) 또는 eSIM을 이용하는 것이 가장 효율적이고 경제적입니다.</li>
-                    <li><strong>현금:</strong> 카드 사용이 보편적이지만, 소규모 상점이나 시장을 대비해 약간의 유로 현금을 준비하세요.</li>
-                    <li><strong>시에스타:</strong> 스페인 현지 식당과 상점은 오후 2시~5시경 문을 닫는 경우가 많으니 영업 시간을 미리 확인하세요.</li>
-                    <li><strong>소매치기 주의:</strong> 바르셀로나의 유명 관광지에서는 소매치기가 많으니 소지품 관리에 각별히 신경 써야 합니다.</li>
-                </ul>
-            </div>
-        </section>
+        <!-- Footer -->
+        <footer class="text-center mt-12 py-4 text-gray-500 text-sm">
+            <p>우리만의 완벽한 스페인 신혼여행, 사랑해 자기 ❤️</p>
+        </footer>
+
     </div>
 
-    <script>
-        // Get the tab buttons and content sections
-        const dashboardTab = document.getElementById('dashboard-tab');
-        const bookingInfoTab = document.getElementById('booking-info-tab');
-        const itineraryTab = document.getElementById('itinerary-tab');
-        const cityFeaturesTab = document.getElementById('city-features-tab');
-        const foodTab = document.getElementById('food-tab');
-        const budgetTipsTab = document.getElementById('budget-tips-tab');
-        
-        const dashboardSection = document.getElementById('dashboard');
-        const bookingInfoSection = document.getElementById('booking-info');
-        const itinerarySection = document.getElementById('itinerary');
-        const cityFeaturesSection = document.getElementById('city-features');
-        const foodSection = document.getElementById('food');
-        const budgetTipsSection = document.getElementById('budget-tips');
-        
-        const allSections = [dashboardSection, bookingInfoSection, itinerarySection, cityFeaturesSection, foodSection, budgetTipsSection];
-        const allTabs = [dashboardTab, bookingInfoTab, itineraryTab, cityFeaturesTab, foodTab, budgetTipsTab];
-
-        // Function to show a specific section
-        function showSection(sectionToShow, tabToActivate) {
-            allSections.forEach(section => {
-                section.classList.add('hidden');
-            });
-            allTabs.forEach(tab => {
-                tab.classList.remove('active');
-                tab.classList.remove('text-indigo-800');
-                tab.classList.add('text-gray-600');
-            });
-            sectionToShow.classList.remove('hidden');
-            tabToActivate.classList.add('active');
-            tabToActivate.classList.remove('text-gray-600');
-            tabToActivate.classList.add('text-indigo-800');
-        }
-
-        // Add event listeners to the tab buttons
-        dashboardTab.addEventListener('click', () => {
-            showSection(dashboardSection, dashboardTab);
-        });
-
-        bookingInfoTab.addEventListener('click', () => {
-            showSection(bookingInfoSection, bookingInfoTab);
-        });
-
-        itineraryTab.addEventListener('click', () => {
-            showSection(itinerarySection, itineraryTab);
-        });
-
-        cityFeaturesTab.addEventListener('click', () => {
-            showSection(cityFeaturesSection, cityFeaturesTab);
-        });
-        
-        foodTab.addEventListener('click', () => {
-            showSection(foodSection, foodTab);
-        });
-
-        budgetTipsTab.addEventListener('click', () => {
-            showSection(budgetTipsSection, budgetTipsTab);
-        });
-
-        // Set the initial active tab and section
-        showSection(dashboardSection, dashboardTab);
-    </script>
 </body>
 </html>
