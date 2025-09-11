@@ -33,32 +33,24 @@
     <div id="table-container"></div>
 
     <script>
-        // 1. 제공해주신 구글 스프레드시트의 CSV URL
+        // 제공해주신 구글 스프레드시트의 CSV URL
         const googleSheetsUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRYvIKAQ4SsxsoIBiM22Li2b6WLC_Kp4_glVzB56hcefn3v2LXpXWyIW_-3UsuYjUXGCeRPoGEPaPt_/pub?output=csv';
 
-        // 2. CSV 데이터를 가져와 HTML 표로 만드는 함수
         async function fetchAndRenderTable() {
             const container = document.getElementById('table-container');
             container.innerHTML = '데이터를 불러오는 중...';
 
             try {
-                // 데이터를 비동기적으로 가져옵니다.
                 const response = await fetch(googleSheetsUrl);
                 
-                // HTTP 응답이 성공적인지 확인합니다.
                 if (!response.ok) {
                     throw new Error(`HTTP 오류: ${response.status}`);
                 }
 
                 const csvText = await response.text();
-
-                // CSV 데이터를 줄(행)과 셀(열) 단위로 분리합니다.
                 const rows = csvText.trim().split('\n');
-                
-                // HTML 테이블 요소를 생성합니다.
                 const table = document.createElement('table');
 
-                // 첫 번째 행은 헤더(제목)입니다.
                 const headerRow = table.insertRow();
                 const headers = rows[0].split(',');
                 headers.forEach(headerText => {
@@ -67,7 +59,6 @@
                     headerRow.appendChild(th);
                 });
 
-                // 나머지 행은 데이터입니다.
                 for (let i = 1; i < rows.length; i++) {
                     const dataRow = table.insertRow();
                     const cells = rows[i].split(',');
@@ -78,18 +69,15 @@
                     });
                 }
                 
-                // 기존 내용을 비우고 생성된 테이블을 삽입합니다.
                 container.innerHTML = '';
                 container.appendChild(table);
 
             } catch (error) {
-                // 오류가 발생하면 오류 메시지를 표시합니다.
                 container.innerHTML = `<p>데이터를 불러오는 데 실패했습니다. 오류: ${error.message}</p>`;
                 console.error('오류 발생:', error);
             }
         }
 
-        // 웹페이지가 로드되면 함수를 실행합니다.
         document.addEventListener('DOMContentLoaded', fetchAndRenderTable);
 
     </script>
